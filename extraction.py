@@ -2,6 +2,12 @@ import transformation as transform
 import requests
 from bs4 import BeautifulSoup
 
+"""
+Cette fonction permet d'extraire les données d'un livre à partir de son url 
+paramètre : url d'un livre
+retour : un dictionnaire qui contient toutes les informations du livre
+"""
+
 
 def extraire_les_donnees_d_un_livre(url_un_livre):
     toutes_infos_d_un_livre = dict()
@@ -63,6 +69,13 @@ def extraire_les_donnees_d_un_livre(url_un_livre):
     return toutes_infos_d_un_livre
 
 
+"""
+Cette fonction permet d'extraire tous les livres affichés dans une page
+paramètre : l'url d'une page
+retour : une liste de tous les urls des livre qui sont dans la page
+"""
+
+
 def extraire_les_livres_d_une_page(url_une_page):
     url_fixe_livre = "http://books.toscrape.com/catalogue/"
     urls_livres_d_une_page = []
@@ -77,6 +90,13 @@ def extraire_les_livres_d_une_page(url_une_page):
         urls_livres_d_une_page.append(url_livre)
 
     return urls_livres_d_une_page
+
+
+"""
+Cette fonction permet d'extraire les urls des livres qui appartiennent à une catégorie
+paramètre : l'url d'une catégorie
+retour : une liste des urls des livres qui appartiennent à cette catégorie
+"""
 
 
 def extraire_les_livres_d_une_categorie(url_d_une_categ):
@@ -105,6 +125,12 @@ def extraire_les_livres_d_une_categorie(url_d_une_categ):
         break
 
     return urls_une_categorie
+
+
+"""
+Cette fontion permet d'extraire les noms et urls de toutes les catégories
+retour : un dictionnaire qui contient les noms et les urls de toutes les catégories
+"""
 
 
 def extraire_les_livres_de_toutes_les_categories():
