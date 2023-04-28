@@ -3,9 +3,11 @@ import chargement as load
 
 if __name__ == '__main__':
     """
-    Enregistrement des livres de toutes les catégories en faisant appele à la fonction 
-    charger_infos_et_image_d_un_livre_d_une_categorie(nom_categorie, infos_livres_d_une_categorie)
-    qui fait en sorte de séparer chaque catégorie à part dans un dossier.
+    chargement des livres de toutes les catégories en faisant appele aux fonctions
+    des modules extractions.py et chargement.py.
+    l'appel de la denière fonction : charger_infos_et_image_d_un_livre_d_une_categorie
+                                            (nom_categorie, infos_livres_d_une_categorie),
+    fait en sorte de charger les données et séparer chaque catégorie à part dans un dossier.
     """
 
     urls_toutes_categories = extract.extraire_les_livres_de_toutes_les_categories()
@@ -19,6 +21,8 @@ if __name__ == '__main__':
             for url_d_un_livre in urls_livres_de_la_page:
                 toutes_les_infos_d_un_livre = extract.extraire_les_donnees_d_un_livre(url_d_un_livre)
                 infos_livres_d_une_categorie.append(toutes_les_infos_d_un_livre)
+
+                # cette ligne permet uniquement de visualiser l'évolution du programme
                 print(f"livre url : {url_d_un_livre} ===> catégorie : {nom_categorie} : url N° {i}")
                 i += 1
 
@@ -26,7 +30,9 @@ if __name__ == '__main__':
 
     """
     chargement des livres et de leurs images (toutes les catégories).
-     
+    On fait appel aux foctions des modules extractions.py et chargement.py pour charger les données
+    de tous des livres dans un seul fichier csv "tous_les_livres" donné en paramètre 
+    et les images de tous les livres dans un seule dossier "toutes_les_images"
     """
     i = 1
     infos_de_tous_les_livres = list()
@@ -39,6 +45,8 @@ if __name__ == '__main__':
             for url_d_un_livre in urls_livres_de_la_page:
                 toutes_les_infos_d_un_livre = extract.extraire_les_donnees_d_un_livre(url_d_un_livre)
                 infos_de_tous_les_livres.append(toutes_les_infos_d_un_livre)
+
+                # cette ligne permet uniquement de visualiser l'évolution du programme
                 print(f"url livre : {url_d_un_livre} ===>  N°{i}")
                 i += 1
     load.charger_un_livre(infos_de_tous_les_livres, 'tous_les_livres')

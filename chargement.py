@@ -3,8 +3,8 @@ import os
 import requests
 
 """
-cette fonction permet l'enregistrement les données d'un livre qui apartient à une catégorie
-Ainsi on peut l'utiliser pour l'enregistrement des livres de toutes les catégories en séparant chaque catégorie 
+cette fonction permet le chargement des données d'un livre qui apartient à une catégorie
+Ainsi on peut l'utiliser pour le chargement des livres de toutes les catégories en séparant chaque catégorie 
 à part dans un dossier.
 Ce dernier contient un fichier csv de la catégorie ainsi qu'un dossier qui contient toutes les images
 de la catégorie.
@@ -29,9 +29,11 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
     if not os.path.exists("categorie_" + categorie):
         os.mkdir("categorie_" + categorie)
     nom_fichier_csv = os.path.join("categorie_" + categorie, categorie + '.csv')
-    # Créer un nouveau fichier pour écrire/ajouter dans le fichier appelé « data.csv »
+
+    # On crée un nouveau fichier en mode écriture avec comme nom la valeur récupérée avant de : nom_fichier_csv
     with open(nom_fichier_csv, 'w', encoding='utf-8', newline='') as nom_fichier_csv:
-        # Créer un objet writer (écriture/ajout) avec ce fichier
+
+        # Créer un objet writer (écriture) avec ce fichier
         writer = csv.writer(nom_fichier_csv, delimiter=',')
         writer.writerow(en_tete)
 
@@ -52,6 +54,8 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
                      prix_sans_tax, nombre_disponible, description_livre, categorie,
                      note_des_avis, url_image]
             writer.writerow(ligne)
+
+            # cette ligne permet uniquement de visualiser l'évolution du programme
             print("écriture des infos livre :      " + titre_livre + "      N°==>" + str(i) +
                   "   Categorie : " + livre['categorie'])
             i += 1
@@ -59,22 +63,29 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
     j = 1
     for livre in infos_livre:
 
+        # on nettoie le titre du livre pour pouvoir l'attribuer comme nom d'image
         titre_img = livre['titre']
         nom_image = titre_img.replace('(', '').replace(' ', '_').replace('#', '_').replace(')', '') \
             .replace(':', '_').replace('/', '_').replace('"', '_').replace('...', '_') \
             .replace('*', '_').replace('?', '_').strip()
 
+        # on spécifie le chemin avec path pour qu'il soit compatible avec tous les OS avec os.path.join
         nom_fichier_image = os.path.join(os.path.join("categorie_" + categorie, "images"), nom_image + ".jpg")
 
+        # on vérifie si le dossier images n'existe pas, si c'est le cas, on le crée
         if not os.path.exists(os.path.join("categorie_" + categorie, "images")):
             os.mkdir(os.path.join("categorie_" + categorie, "images"))
 
         url_image = livre['url image']
         image = requests.get(url_image).content
 
+        # On crée un nouveau fichier en mode écriture binaire avec comme nom la valeur récupérée
+        # avant de : nom_fichier_image
         with open(nom_fichier_image, 'wb') as images:
             try:
                 images.write(image)
+
+                # cette ligne permet uniquement de visualiser l'évolution du programme
                 print("écriture de l'image :      " + url_image + "      N°==>" + str(j) + "   Categorie : "
                       + livre['categorie'])
                 j += 1
@@ -84,12 +95,12 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
 
 
 """
-Cette fonction permet l'enregistrement des données d'un livre dans un fichier csv.
-Ainsi on peut choisir d'enregistrer tous les livres on donnant au nom_fichier_csv : 
-    tous_les_livres : lorsqu'on souhaite enregistrer tous les livres de toutes les catégories
-    sequential_art : lorsqu'on souhaite enregistrer tous les livres de la catégorie choisie
+Cette fonction permet le chargement des données d'un livre dans un fichier csv.
+Ainsi on peut choisir de charger tous les livres on donnant au nom_fichier_csv : 
+    tous_les_livres : lorsqu'on souhaite charger tous les livres de toutes les catégories
+    sequential_art : lorsqu'on souhaite charger tous les livres de la catégorie choisie
 
-Comme exemple : on peut enregistrer les données d'un livre qui appartient à la catégorie : Sequential Art. 
+Comme exemple : on peut charger les données d'un livre qui appartient à la catégorie : Sequential Art. 
 Pour le faire on donne comme paramètres positionels à la fonction : 
     infos_livres : url du livre
     nom_fichier_csv : sequential_art 
@@ -102,7 +113,7 @@ def charger_un_livre(infos_livre, nom_fichier_csv):
                "price_excluding_tax", "number_available", "product_description", "category",
                "review_rating", "image_url"]
 
-    # Créer un nouveau fichier pour écrire/ajouter dans le fichier (nom_fichier_csv)
+    # On crée un nouveau fichier en mode écriture dans le fichier (nom_fichier_csv)
     with open(nom_fichier_csv + '.csv', 'w', encoding='utf-8', newline='') as data:
         # Créer un objet writer (écriture/ajout) avec ce fichier
         writer = csv.writer(data, delimiter=',')
@@ -134,16 +145,20 @@ Cette fonction permet l'enregistrement d'une image d'un livre (dans un dossier)
 def charger_une_image(infos_livre):
     i = 1
     for livre in infos_livre:
+
+        # on nettoie le titre du livre pour pouvoir l'attribuer comme nom d'image
         titre = livre['titre']
         titre = titre.replace('(', '').replace(' ', '_').replace('#', '_').replace(')', '')\
             .replace(':', '_').replace('/', '_').replace('"', '_').replace('...', '_')\
             .replace('*', '_').replace('?', '_').strip()
+
         # titre = 'Livre_' + str(i)
         url_image = livre['url image']
         image = requests.get(url_image).content
         # nom_fichier = 'images_livres/' + titre + '.jpg'
         # nom_fichier = titre + '.jpg'
 
+        # on vérifie si le dossier "toutes_les_images" n'existe pas, si c'est le cas, on le crée
         if not os.path.exists("toutes_les_images"):
             os.mkdir("toutes_les_images")
         nom_fichier = os.path.join("toutes_les_images", titre + '.jpg')
