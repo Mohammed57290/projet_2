@@ -18,15 +18,16 @@ Le résultat après l'exécution du projet :
 1. **un dossier par catégorie** qui porte son nom et qui contient à son tour un fichier csv qui porte le nom de la catégorie qui contient toutes informations des livres 
 de cette catégorie ainsi qu'un fichier images qui contient toutes les images des livres de la catégorie avec la structure suivante :
 
-   - category_a/
-     - images/
-     - category_a.csv
-   - category_b/
-     - images/
-     - category_b/
-
-   ...
-
+```
+     categorie_a/
+          images/
+          categorrie_a.csv
+     categorie_b/
+          images/
+          categorie_b/
+     ...
+   
+```
 2. **un fichier tous_les_livres.csv** qui contient les informations de tous les livres du site Books to Scrape
 3. **un dossier toutes_les_images.csv** qui contient toutes les images de tous les livres du site
 
