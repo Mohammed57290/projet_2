@@ -4,7 +4,7 @@ import requests
 
 """
 cette fonction permet l'enregistrement les données d'un livre qui apartient à une catégorie
-Ainsi on peut l'utiliser pour  l'enregistrement des livres de toutes les catégories en séparant chaque catégorie 
+Ainsi on peut l'utiliser pour l'enregistrement des livres de toutes les catégories en séparant chaque catégorie 
 à part dans un dossier.
 Ce dernier contient un fichier csv de la catégorie ainsi qu'un dossier qui contient toutes les images
 de la catégorie.
