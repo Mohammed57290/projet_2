@@ -38,7 +38,7 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
         writer.writerow(en_tete)
 
         i = 1
-        for livre in infos_livre:
+        for i, livre in enumerate(infos_livre):
             url_page_livre = livre['url page']
             code_universel_produit_valeur = livre['code universel produit']
             titre_livre = livre['titre']
@@ -56,12 +56,10 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
             writer.writerow(ligne)
 
             # cette ligne permet uniquement de visualiser l'évolution du programme
-            print("écriture des infos livre :      " + titre_livre + "      N°==>" + str(i) +
+            print("écriture des infos livre :      " + titre_livre + "      N°==>" + str(i + 1) +
                   "   Categorie : " + livre['categorie'])
-            i += 1
 
-    j = 1
-    for livre in infos_livre:
+    for i, livre in enumerate(infos_livre):
 
         # on nettoie le titre du livre pour pouvoir l'attribuer comme nom d'image
         titre_img = livre['titre']
@@ -86,9 +84,8 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
                 images.write(image)
 
                 # cette ligne permet uniquement de visualiser l'évolution du programme
-                print("écriture de l'image :      " + url_image + "      N°==>" + str(j) + "   Categorie : "
+                print("écriture de l'image :      " + url_image + "      N°==>" + str(i + 1) + "   Categorie : "
                       + livre['categorie'])
-                j += 1
             except IOError:
                 print("Cette image n'existe pas")
                 pass
@@ -143,8 +140,7 @@ Cette fonction permet l'enregistrement d'une image d'un livre (dans un dossier)
 
 
 def charger_une_image(infos_livre):
-    i = 1
-    for livre in infos_livre:
+    for i, livre in enumerate(infos_livre):
 
         # on nettoie le titre du livre pour pouvoir l'attribuer comme nom d'image
         titre = livre['titre']
@@ -166,8 +162,7 @@ def charger_une_image(infos_livre):
         with open(nom_fichier, 'wb') as f:
             try:
                 f.write(image)
-                print('écriture img livre :    ' + titre + '      N°==>' + str(i) + ' url_image : ' + url_image)
-                i += 1
+                print('écriture img livre :    ' + titre + '      N°==>' + str(i + 1) + ' url_image : ' + url_image)
             except IOError:
                 print("Cette image n'existe pas")
                 pass
