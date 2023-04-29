@@ -12,7 +12,7 @@ Le fichier requirements.txt liste les paquets Python dont l'installation est req
 Pour exécuter le projet il suffit d'installer l'environnement mentionné dans le fichier equirements.txt et lancer le projet en exécutant main avec les instructions suivantes :
 
 ````commandline
-pyhton pip install -r requirements 
+python pip install -r requirements.txt
 python main.py
 ````
 
