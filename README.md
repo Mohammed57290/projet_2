@@ -9,7 +9,14 @@
 ### Comment exécuter le projet :
 
 Le fichier requirements.txt liste les paquets Python dont l'installation est requise dans un environnement virtuel pour que l'application s'exécute correctement. 
-Pour exécuter le projet il suffit d'installer l'environnement mentionné dans le fichier equirements.txt et lancer le projet en exécutant main.
+Pour exécuter le projet il suffit d'installer l'environnement mentionné dans le fichier equirements.txt et lancer le projet en exécutant main avec les instructions suivantes :
+
+````commandline
+pyhton pip install -r requirements 
+python main.py
+````
+
+
 
 ### Comment utiliser le projet :
 
@@ -21,10 +28,10 @@ de cette catégorie ainsi qu'un fichier images qui contient toutes les images de
 ```
      categorie_a/
           images/
-          categorrie_a.csv
+          categorie_a.csv
      categorie_b/
           images/
-          categorie_b/
+          categorie_b.csv
      ...
    
 ```
