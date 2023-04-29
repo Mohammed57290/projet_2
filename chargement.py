@@ -37,7 +37,6 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
         writer = csv.writer(nom_fichier_csv, delimiter=',')
         writer.writerow(en_tete)
 
-        i = 1
         for i, livre in enumerate(infos_livre):
             url_page_livre = livre['url page']
             code_universel_produit_valeur = livre['code universel produit']
