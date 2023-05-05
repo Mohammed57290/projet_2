@@ -1,0 +1,58 @@
+/env
+/toutes_les_images
+tous_les_livres.csv
+
+/categorie_Academic
+/categorie_Add a comment
+/categorie_Adult Fiction
+/categorie_Art
+/categorie_Autobiography
+/categorie_Biography
+/categorie_Business
+/categorie_Childrens
+/categorie_Christian
+/categorie_Christian Fiction
+/categorie_Classics
+/categorie_Contemporary
+/categorie_Crime
+/categorie_Cultural
+/categorie_Default
+/categorie_Erotica
+/categorie_Fantasy
+/categorie_Fiction
+/categorie_Food and Drink
+/categorie_Health
+/categorie_Historical
+/categorie_Historical Fiction
+/categorie_History
+/categorie_Horror
+/categorie_Humor
+/categorie_Music
+/categorie_Mystery
+/categorie_New Adult
+/categorie_Nonfiction
+/categorie_Novels
+/categorie_Paranormal
+/categorie_Parenting
+/categorie_Philosophy
+/categorie_Poetry
+/categorie_Politics
+/categorie_Psychology
+/categorie_Religion
+/categorie_Romance
+/categorie_Science
+/categorie_Science Fiction
+/categorie_Self Help
+/categorie_Sequential Art
+/categorie_Short Stories
+/categorie_Spirituality
+/categorie_Sports and Games
+/categorie_Suspense
+/categorie_Thriller
+/categorie_Travel
+/categorie_Womens Fiction
+/categorie_Young Adult
+
+.idea/
+
+__pycache__/
