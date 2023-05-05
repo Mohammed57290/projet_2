@@ -1,6 +1,8 @@
 import csv
 import os
 import requests
+import transformation as transform
+
 
 """
 cette fonction permet le chargement des données d'un livre qui apartient à une catégorie
@@ -60,11 +62,7 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
 
     for i, livre in enumerate(infos_livre):
 
-        # on nettoie le titre du livre pour pouvoir l'attribuer comme nom d'image
-        titre_img = livre['titre']
-        nom_image = titre_img.replace('(', '').replace(' ', '_').replace('#', '_').replace(')', '') \
-            .replace(':', '_').replace('/', '_').replace('"', '_').replace('...', '_') \
-            .replace('*', '_').replace('?', '_').strip()
+        nom_image = transform.transformer_nom_image(livre)
 
         # on spécifie le chemin avec path pour qu'il soit compatible avec tous les OS avec os.path.join
         nom_fichier_image = os.path.join(os.path.join("categorie_" + categorie, "images"), nom_image + ".jpg")
@@ -141,27 +139,20 @@ Cette fonction permet l'enregistrement d'une image d'un livre (dans un dossier)
 def charger_une_image(infos_livre):
     for i, livre in enumerate(infos_livre):
 
-        # on nettoie le titre du livre pour pouvoir l'attribuer comme nom d'image
-        titre = livre['titre']
-        titre = titre.replace('(', '').replace(' ', '_').replace('#', '_').replace(')', '')\
-            .replace(':', '_').replace('/', '_').replace('"', '_').replace('...', '_')\
-            .replace('*', '_').replace('?', '_').strip()
+        nom_image = transform.transformer_nom_image(livre)
 
-        # titre = 'Livre_' + str(i)
         url_image = livre['url image']
         image = requests.get(url_image).content
-        # nom_fichier = 'images_livres/' + titre + '.jpg'
-        # nom_fichier = titre + '.jpg'
 
         # on vérifie si le dossier "toutes_les_images" n'existe pas, si c'est le cas, on le crée
         if not os.path.exists("toutes_les_images"):
             os.mkdir("toutes_les_images")
-        nom_fichier = os.path.join("toutes_les_images", titre + '.jpg')
+        nom_fichier = os.path.join("toutes_les_images", nom_image + '.jpg')
 
         with open(nom_fichier, 'wb') as f:
             try:
                 f.write(image)
-                print('écriture img livre :    ' + titre + '      N°==>' + str(i + 1) + ' url_image : ' + url_image)
+                print('écriture img livre :    ' + nom_image + '      N°==>' + str(i + 1) + ' url_image : ' + url_image)
             except IOError:
                 print("Cette image n'existe pas")
                 pass

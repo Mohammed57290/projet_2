@@ -9,11 +9,15 @@
 ### Comment exécuter le projet :
 
 Le fichier requirements.txt liste les paquets Python dont l'installation est requise dans un environnement virtuel pour que l'application s'exécute correctement. 
-Pour exécuter le projet il suffit d'installer l'environnement mentionné dans le fichier equirements.txt et lancer le projet en exécutant main avec les instructions suivantes :
+Pour exécuter le projet il suffit d'installer un environnement virtuel, installer les dependences mentionnées dans le fichier equirements.txt et lancer le projet 
+en exécutant main avec les instructions suivantes :
 
 ````commandline
-python pip install -r requirements.txt
-python main.py
+python -m venv env                  # pour créer un environnement virtuel
+.\env\scripts\activate              # pour activer l'environnement
+pip install -r requirements.txt     # pour installer les dépendances
+pip freeze                          # pour s'assurer que les dépendances ont bien été installées
+python main.py                      # pour exécuter le programme
 ````
 
 
@@ -35,7 +39,7 @@ de cette catégorie ainsi qu'un fichier images qui contient toutes les images de
      ...
    
 ```
-2. **un fichier tous_les_livres.csv** qui contient les informations de tous les livres du site Books to Scrape
-3. **un dossier toutes_les_images.csv** qui contient toutes les images de tous les livres du site
+2. **tous_les_livres.csv : un fichier** qui contient les informations de tous les livres du site Books to Scrape
+3. **toutes_les_images.csv : un dossier** qui contient toutes les images de tous les livres du site
 
 L'ouverture/importation des fichiers csv dans un tableur comme Excel ou google Sheets permet la visualisation des informations de chaque livre.
