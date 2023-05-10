@@ -5,31 +5,35 @@ import transformation as transform
 
 
 """
-cette fonction permet le chargement des données d'un livre qui apartient à une catégorie
-Ainsi on peut l'utiliser pour le chargement des livres de toutes les catégories en séparant chaque catégorie 
-à part dans un dossier.
-Ce dernier contient un fichier csv de la catégorie ainsi qu'un dossier qui contient toutes les images
-de la catégorie.
+cette fonction permet le chargement des données des livres dans plusieurs dossiers.
+Chaque dossier represente une catégorie.
+Ce dernier contient un fichier csv qui contient les données des livres et un dossier "images"
+qui contient toutes les images de cette catégorie.
 arborescence : 
-                category_a/
+                categorie_a/
                     images/
-                    category_a.csv
-                category_b/
+                    categorie_a.csv
+                categorie_b/
                     images/
-                    category_b/
+                    categorie_b/
                 ...
-paramètres : nom de la categorie , url du livre(infos_livre)
+paramètres : nom de la catégorie , url du livre(infos_livre)
 """
 
 
-def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
+def charger_infos_et_images_des_livres_d_une_categorie(categorie, infos_livre):
+
     # On crée une liste pour les en-têtes
     en_tete = ["product_page_url", "universal_ product_code (upc)", "title", "price_including_tax",
                "price_excluding_tax", "number_available", "product_description", "category",
                "review_rating", "image"]
 
+    # On teste si le dossier de cette catégorie existe sinon on le crée
     if not os.path.exists("categorie_" + categorie):
         os.mkdir("categorie_" + categorie)
+
+    # On Crée le fichier CSV en spécifiant le chemin avec avec os.path.join pour qu'il soit compatible
+    # avec tous les OS
     nom_fichier_csv = os.path.join("categorie_" + categorie, categorie + '.csv')
 
     # On crée un nouveau fichier en mode écriture avec comme nom la valeur récupérée avant de : nom_fichier_csv
@@ -56,7 +60,7 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
                      note_des_avis, url_image]
             writer.writerow(ligne)
 
-            # cette ligne permet uniquement de visualiser l'évolution du programme
+            # Cette ligne permet uniquement de visualiser l'évolution du programme
             print("écriture des infos livre :      " + titre_livre + "      N°==>" + str(i + 1) +
                   "   Categorie : " + livre['categorie'])
 
@@ -64,10 +68,10 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
 
         nom_image = transform.transformer_nom_image(livre)
 
-        # on spécifie le chemin avec path pour qu'il soit compatible avec tous les OS avec os.path.join
+        # On spécifie le chemin avec avec os.path.join pour qu'il soit compatible avec tous les OS
         nom_fichier_image = os.path.join(os.path.join("categorie_" + categorie, "images"), nom_image + ".jpg")
 
-        # on vérifie si le dossier images n'existe pas, si c'est le cas, on le crée
+        # On vérifie si le dossier images n'existe pas, si c'est le cas, on le crée
         if not os.path.exists(os.path.join("categorie_" + categorie, "images")):
             os.mkdir(os.path.join("categorie_" + categorie, "images"))
 
@@ -80,7 +84,7 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
             try:
                 images.write(image)
 
-                # cette ligne permet uniquement de visualiser l'évolution du programme
+                # Cette ligne permet uniquement de visualiser l'évolution du programme
                 print("écriture de l'image :      " + url_image + "      N°==>" + str(i + 1) + "   Categorie : "
                       + livre['categorie'])
             except IOError:
@@ -92,7 +96,7 @@ def charger_infos_et_image_d_un_livre_d_une_categorie(categorie, infos_livre):
 Cette fonction permet le chargement des données d'un livre dans un fichier csv.
 Ainsi on peut choisir de charger tous les livres on donnant au nom_fichier_csv : 
     tous_les_livres : lorsqu'on souhaite charger tous les livres de toutes les catégories
-    sequential_art : lorsqu'on souhaite charger tous les livres de la catégorie choisie
+    sequential_art : lorsqu'on souhaite charger tous les livres de la catégorie sequential_art par exemple.
 
 Comme exemple : on peut charger les données d'un livre qui appartient à la catégorie : Sequential Art. 
 Pour le faire on donne comme paramètres positionels à la fonction : 
@@ -106,7 +110,7 @@ def charger_un_livre(infos_livre, nom_fichier_csv):
     en_tete = ["product_page_url", "universal_ product_code (upc)", "title", "price_including_tax",
                "price_excluding_tax", "number_available", "product_description", "category",
                "review_rating", "image_url"]
-
+    # if not os.path.exists(nom_fichier_csv):
     # On crée un nouveau fichier en mode écriture dans le fichier (nom_fichier_csv)
     with open(nom_fichier_csv + '.csv', 'w', encoding='utf-8', newline='') as data:
         # Créer un objet writer (écriture/ajout) avec ce fichier
@@ -137,6 +141,10 @@ Cette fonction permet l'enregistrement d'une image d'un livre (dans un dossier)
 
 
 def charger_une_image(infos_livre):
+
+    # on vérifie si le dossier "toutes_les_images" n'existe pas, si c'est le cas, on le crée
+    if not os.path.exists("toutes_les_images"):
+        os.mkdir("toutes_les_images")
     for i, livre in enumerate(infos_livre):
 
         nom_image = transform.transformer_nom_image(livre)
@@ -144,14 +152,13 @@ def charger_une_image(infos_livre):
         url_image = livre['url image']
         image = requests.get(url_image).content
 
-        # on vérifie si le dossier "toutes_les_images" n'existe pas, si c'est le cas, on le crée
-        if not os.path.exists("toutes_les_images"):
-            os.mkdir("toutes_les_images")
         nom_fichier = os.path.join("toutes_les_images", nom_image + '.jpg')
 
         with open(nom_fichier, 'wb') as f:
             try:
                 f.write(image)
+
+                # Cette ligne permet uniquement de visualiser l'évolution du programme
                 print('écriture img livre :    ' + nom_image + '      N°==>' + str(i + 1) + ' url_image : ' + url_image)
             except IOError:
                 print("Cette image n'existe pas")

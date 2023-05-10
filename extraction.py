@@ -65,11 +65,10 @@ def extraire_les_donnees_d_un_livre(url_un_livre):
     except AttributeError:
         nombre_etoiles_str = "0"
 
-    """
-    Extraire l'url de l'image du livre et le concatener avec l'url d_acceuil du site pour 
-    avoir l'url complet de l'image
-    """
-    url_partiel_image = infos_livre.find('img').get('src')
+    try:
+        url_partiel_image = infos_livre.find('img').get('src')
+    except AttributeError:
+        url_partiel_image = "../../media/cache/6d/41/6d418a73cc7d4ecfd75ca11d854041db.jpg"
 
     toutes_infos_d_un_livre['url page'] = url_un_livre
     toutes_infos_d_un_livre['code universel produit'] = code_universel_produit
@@ -149,8 +148,18 @@ def extraire_les_livres_de_toutes_les_categories():
 
     noms_et_urls_categories = dict()
     url_accueil = "http://books.toscrape.com/"
+    try:
+        url_page_accueil = requests.get(url_accueil)
+    except requests.exceptions.HTTPError as e:
+        print("Erreur HTTP")
+        print(e.args[0])
+    except requests.exceptions.ReadTimeout as e:
+        print("Time out")
+    except requests.exceptions.ConnectionError as conerr:
+        print("Erreur de connexion")
+    except requests.exceptions.RequestException as errex:
+        print("Exception request")
 
-    url_page_accueil = requests.get(url_accueil)
     soup_accueil = BeautifulSoup(url_page_accueil.content, 'html.parser')
 
     # On extrait toutes les catégories des livres

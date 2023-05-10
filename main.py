@@ -10,7 +10,7 @@ if __name__ == '__main__':
     des modules extractions.py et chargement.py.
     l'appel de la denière fonction : charger_infos_et_image_d_un_livre_d_une_categorie
                                             (nom_categorie, infos_livres_d_une_categorie),
-    fait en sorte de charger les données et séparer chaque catégorie à part dans un dossier.
+    fait en sorte de charger les données de chaque catégorie dans un dossier à part.
     """
 
     urls_toutes_categories = extract.extraire_les_livres_de_toutes_les_categories()
@@ -27,7 +27,7 @@ if __name__ == '__main__':
                 # cette ligne permet uniquement de visualiser l'évolution du programme
                 print(f"livre url : {url_d_un_livre} ===> catégorie : {nom_categorie} : url N° {i}")
                 i += 1
-        load.charger_infos_et_image_d_un_livre_d_une_categorie(nom_categorie, infos_livres_d_une_categorie)
+        load.charger_infos_et_images_des_livres_d_une_categorie(nom_categorie, infos_livres_d_une_categorie)
 
     """
     chargement des livres et de leurs images (toutes les catégories).

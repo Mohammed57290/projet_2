@@ -14,13 +14,16 @@ def transformer_les_donnees_d_un_livre(url_un_livre):
     # l'url de l'image est sous forme de : ../../media/cache/08/e9/08e94f3731d7d6b760dfbfbc02ca5c62.jpg
     # on enlève la première parie de l'url : ../../ et on garde le reste
     url_partiel_image_nettoye = url_partiel_image[6:]
+
+    # on fait la concaténation avec l'url d_acceuil du site pour avoir l'url complet de l'image
+
     toutes_infos_d_un_livre['url image'] = url_acceuil + url_partiel_image_nettoye
 
     return toutes_infos_d_un_livre
 
 
 """
-Cette fonction permet de transformer le nomnre d'étoiles en chaine de caractères en nombre
+Cette fonction permet de transformer le nombre d'étoiles en chaine de caractères en nombre
 paramètre : nombre d'étoiles en chaine de caractères
 retour : nombre d'étoiles avec une valeur numérique
 """
@@ -45,6 +48,7 @@ def transformer_le_nombre_d_etoiles_str_en_nombre(nombre_etoiles_str):
 
 def transformer_urls_des_livres_d_une_page(url_livre):
 
+    # on nettoie l'url de la page pour qu'elle soit valide
     url_livre_d_une_page_valide = url_livre.replace('../../../', '')
     return url_livre_d_une_page_valide
 
@@ -53,7 +57,7 @@ def transformer_url_next(url_d_une_categ, url_next):
     # on cherche la dernière occurence du caractère '/'
     index = url_d_une_categ.rfind('/')
     # on prend l'url da page suivante du début jusqu'à l'index + 1 (exclusif) et on rajoute
-    # l'url du next
+    # l'url du next (page suivante)
     url_page_suivante = url_d_une_categ[:index + 1].strip() + url_next
 
     return url_page_suivante
@@ -65,5 +69,5 @@ def transformer_nom_image(livre):
     titre_img = livre['titre']
     nom_image = titre_img.replace('(', '').replace(' ', '_').replace('#', '_').replace(')', '') \
         .replace(':', '_').replace('/', '_').replace('"', '_').replace('...', '_') \
-        .replace('*', '_').replace('?', '_').strip()
+        .replace('*', '_').replace('?', '_').replace(',','').strip()
     return nom_image
