@@ -83,6 +83,6 @@ la structure est la suivante :
    
 ```
 2. **tous_les_livres.csv : un fichier** qui contient les informations de tous les livres du site Books to Scrape
-3. **toutes_les_images.csv : un dossier** qui contient toutes les images de tous les livres du site
+3. **toutes_les_images : un dossier** qui contient toutes les images de tous les livres du site
 
 L'ouverture/importation des fichiers csv dans un tableur comme Excel ou google Sheets permet la visualisation des informations de chaque livre.
