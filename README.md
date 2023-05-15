@@ -40,7 +40,7 @@ pour créer un environnement virtuel
 ````
 Pour activer l'environnement sous windows
 ````
-./env/bin/activate
+source /env/bin/activate
 ````
 Pour activer l'environnement sous Linux et MacOS
 

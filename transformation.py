@@ -69,5 +69,5 @@ def transformer_nom_image(livre):
     titre_img = livre['titre']
     nom_image = titre_img.replace('(', '').replace(' ', '_').replace('#', '_').replace(')', '') \
         .replace(':', '_').replace('/', '_').replace('"', '_').replace('...', '_') \
-        .replace('*', '_').replace('?', '_').replace(',','').strip()
+        .replace('*', '_').replace('?', '_').replace(',', '').strip()
     return nom_image

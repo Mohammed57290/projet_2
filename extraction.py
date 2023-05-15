@@ -14,6 +14,7 @@ def extraire_les_donnees_d_un_livre(url_un_livre):
     toutes_infos_d_un_livre = dict()
 
     page_info_livre = requests.get(url_un_livre)
+    page_info_livre.encoding = "utf-8"
     soup_infos_livre = BeautifulSoup(page_info_livre.text, 'html.parser')
 
     # Extraire toutes les données du livre :
@@ -149,7 +150,7 @@ def extraire_les_livres_de_toutes_les_categories():
     noms_et_urls_categories = dict()
     url_accueil = "http://books.toscrape.com/"
     try:
-        url_page_accueil = requests.get(url_accueil)
+        page_accueil = requests.get(url_accueil)
     except requests.exceptions.HTTPError as e:
         print("Erreur HTTP")
         print(e.args[0])
@@ -160,7 +161,7 @@ def extraire_les_livres_de_toutes_les_categories():
     except requests.exceptions.RequestException as errex:
         print("Exception request")
 
-    soup_accueil = BeautifulSoup(url_page_accueil.content, 'html.parser')
+    soup_accueil = BeautifulSoup(page_accueil.content, 'html.parser')
 
     # On extrait toutes les catégories des livres
     categories = soup_accueil.find('ul', class_='nav nav-list').find('li').find('ul').find_all('li')
